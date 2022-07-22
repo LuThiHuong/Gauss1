@@ -1,4 +1,8 @@
-#include <iostream>
+
+
+#ifndef MYGAUSS_GAUSSGJ_H
+#define MYGAUSS_GAUSSGJ_H
+// Hàm biến đổi ma trận bổ sung ban đầu về ma trận bậc thang sử dụng thuật toán khử Gauss
 void khuGauss(int n) {
     bienAThanhMatranBoSung();
     float t;
@@ -35,7 +39,17 @@ void khuGaussJordan(int n){
         }
     }
 }
-int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+
+// Hàm giải hệ phương trình sau khi đã đưa ma trận bổ sung về ma trận bậc thang
+void giaiHeGauss(int n) {
+    X[n] = A[n][n+1]/A[n][n];
+    for (int i = n - 1; i >= 1; i--) {
+        X[i] = A[i][n+1];
+        for (int j = i + 1; j <= n; j++) {
+            X[i] = X[i] - A[i][j] * X[j];
+        }
+        X[i] = X[i] / A[i][i];
+    }
 }
+
+#endif //MYGAUSS_GAUSSGJ_H
